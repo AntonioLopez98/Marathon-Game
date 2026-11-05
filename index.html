@@ -236,7 +236,7 @@ es:{
   writing:(g,w)=>"Escribiendo tarjetas, "+g+" de "+w,stop:"Detener",
   off:"La escritura de tarjetas no está disponible en esta vista.",retry:"Reintentar",
   ready:n=>n+" tarjeta"+(n===1?"":"s")+" lista"+(n===1?"":"s"),more:"Escribir más tarjetas",
-  needClaude:"Las tarjetas necesitan la llave de Gemini",couldNot:"No se pudieron escribir las tarjetas",back:"Volver",
+  needClaude:"Las tarjetas necesitan una llave de API",couldNot:"No se pudieron escribir las tarjetas",back:"Volver",
   isUp:n=>esc(n)+" tiene el turno",writingTitle:"Gemini está escribiendo tus tarjetas",
   firstCard:(g,w)=>"La primera tarjeta aparece en unos segundos. "+g+" de "+w+" listas.",
   goesAgain:n=>esc(n)+" juega otra vez",passTo:n=>"Pasa a "+esc(n),
@@ -284,7 +284,7 @@ es:{
   e_rate_limited:"Gemini está ocupado o se alcanzó un límite de uso. Espera un momento y vuelve a intentar.",
   e_upstream_error:"Se cortó la conexión con Gemini. Vuelve a intentar.",
   e_empty:"Gemini no devolvió tarjetas utilizables. Vuelve a intentar.",
-  e_nokey:"Falta la llave de Gemini. Pégala en Ajustes para que se escriban las tarjetas.",e_badkey:"Gemini rechazó la llave. Revisa que esté completa y vigente en Ajustes.",e_badmodel:"Gemini no encontró ese modelo. Revisa el nombre del modelo en Ajustes.",e_nosample:"Falta la llave de Gemini.",
+  e_nokey:"Falta la llave de API. Pégala en Ajustes para que se escriban las tarjetas.",e_badkey:"El proveedor rechazó la llave. Revisa que esté completa y vigente en Ajustes.",e_badmodel:"El proveedor no encontró ese modelo. Revisa el nombre del modelo en Ajustes.",e_nosample:"Falta la llave de Gemini.",
   keyH:"Conexión con Gemini",keyLbl:"Llave de API de Gemini",keyHelp:"Es gratis. Créala en Google AI Studio (aistudio.google.com/apikey) y pégala aquí. Se guarda solo en este navegador.",keyOpen:"Abrir Google AI Studio",modelLbl:"Modelo",modelHelp:"Por defecto gemini-3.5-flash-lite. Si da error de modelo, toca Buscar modelos disponibles y elige uno de la lista.",keyNeed:"Falta la llave",goSetup:"Ir a Ajustes",
   e_refused:"Gemini no pudo escribir tarjetas con estos ajustes. Cambia una categoría o las notas y vuelve a intentar.",
   e_session_expired:"-"
@@ -294,7 +294,7 @@ en:{
   writing:(g,w)=>"Writing cards, "+g+" of "+w,stop:"Stop",
   off:"Card writing is off in this view.",retry:"Try again",
   ready:n=>n+" card"+(n===1?"":"s")+" ready",more:"Write more cards",
-  needClaude:"Cards need the Gemini key",couldNot:"Could not write cards",back:"Back",
+  needClaude:"Cards need an API key",couldNot:"Could not write cards",back:"Back",
   isUp:n=>esc(n)+" is up",writingTitle:"Gemini is writing your cards",
   firstCard:(g,w)=>"The first card shows up in a few seconds. "+g+" of "+w+" ready.",
   goesAgain:n=>esc(n)+" goes again",passTo:n=>"Pass to "+esc(n),
@@ -342,12 +342,26 @@ en:{
   e_rate_limited:"Gemini is busy or a usage limit was reached. Wait a moment, then try again.",
   e_upstream_error:"The connection to Gemini dropped. Try again.",
   e_empty:"Gemini sent back no usable cards. Try again.",
-  e_nokey:"The Gemini key is missing. Paste it in Setup so cards can be written.",e_badkey:"Gemini rejected the key. Check that it is complete and active in Setup.",e_badmodel:"Gemini could not find that model. Check the model name in Setup.",e_nosample:"The Gemini key is missing.",
+  e_nokey:"The API key is missing. Paste it in Setup so cards can be written.",e_badkey:"The provider rejected the key. Check that it is complete and active in Setup.",e_badmodel:"The provider could not find that model. Check the model name in Setup.",e_nosample:"The Gemini key is missing.",
   keyH:"Gemini connection",keyLbl:"Gemini API key",keyHelp:"It is free. Create it in Google AI Studio (aistudio.google.com/apikey) and paste it here. It is stored only in this browser.",keyOpen:"Open Google AI Studio",modelLbl:"Model",modelHelp:"Defaults to gemini-3.5-flash-lite. If you get a model error, tap Find available models and pick one from the list.",keyNeed:"Key needed",goSetup:"Go to Setup",
   e_refused:"Gemini could not write cards for these settings. Change a category or the notes and try again.",
   e_session_expired:"-"
 }};
-const T2={es:{findM:"Buscar modelos disponibles",findingM:"Buscando...",noModels:"No encontré modelos. Revisa la llave.",pickM:"Toca uno para usarlo:"},en:{findM:"Find available models",findingM:"Searching...",noModels:"No models found. Check the key.",pickM:"Tap one to use it:"}};
+const T2={es:{findM:"Buscar modelos disponibles",findingM:"Buscando...",noModels:"No encontré modelos. Revisa la llave.",pickM:"Toca uno para usarlo:",
+  aiH:"Modelo de IA",provLbl:"Quién escribe las tarjetas",
+  provHelp:p=>({gemini:"Gemini tiene plan gratis, con límites diarios.",claude:"Claude suele escribir las mejores preguntas. Su API es de pago (centavos por tanda).",openai:"ChatGPT usa la API de OpenAI, que es de pago (centavos por tanda)."})[p],
+  keyLbl2:n=>"Llave de API de "+n,
+  keyHelp2:p=>({gemini:"Es gratis. Créala en Google AI Studio y pégala aquí. ",claude:"Créala en console.anthropic.com. Es una cuenta aparte de tu suscripción a Claude y necesitas cargar saldo. ",openai:"Créala en platform.openai.com. Es una cuenta aparte de ChatGPT y necesitas cargar saldo. "})[p]+"Se guarda solo en este navegador y solo se envía a ese proveedor.",
+  keyOpen2:"Crear llave",
+  modelHelp2:m=>"Por defecto "+m+". Si da error de modelo, toca Buscar modelos disponibles y elige uno de la lista.",
+  e_nocredit:"El proveedor dice que no hay saldo o cuota disponible. Revisa tu cuenta."},en:{findM:"Find available models",findingM:"Searching...",noModels:"No models found. Check the key.",pickM:"Tap one to use it:",
+  aiH:"AI model",provLbl:"Who writes the cards",
+  provHelp:p=>({gemini:"Gemini has a free tier with daily limits.",claude:"Claude tends to write the best questions. Its API is paid (cents per batch).",openai:"ChatGPT uses OpenAI's API, which is paid (cents per batch)."})[p],
+  keyLbl2:n=>n+" API key",
+  keyHelp2:p=>({gemini:"It is free. Create it in Google AI Studio and paste it here. ",claude:"Create it at console.anthropic.com. It is a separate account from your Claude subscription and you need to add credit. ",openai:"Create it at platform.openai.com. It is a separate account from ChatGPT and you need to add credit. "})[p]+"It is stored only in this browser and only sent to that provider.",
+  keyOpen2:"Create key",
+  modelHelp2:m=>"Defaults to "+m+". If you get a model error, tap Find available models and pick one from the list.",
+  e_nocredit:"The provider says there is no balance or quota left. Check your account."}};
 const t=(k,...a)=>{const d=T[S.ui]||T.es,v=(k in d)?d[k]:(T2[S.ui]||T2.es)[k];return typeof v==="function"?v(...a):v};
 const errText=c=>t("e_"+c)||t("e_upstream_error");
 
@@ -396,8 +410,13 @@ function translateCats(){
 }
 
 /* ---------- state ---------- */
+const PROV={
+  gemini:{name:"Gemini",model:"gemini-3.5-flash-lite",link:"https://aistudio.google.com/apikey",ph:"AIza..."},
+  claude:{name:"Claude",model:"claude-sonnet-5-5",link:"https://console.anthropic.com/settings/keys",ph:"sk-ant-..."},
+  openai:{name:"ChatGPT (OpenAI)",model:"gpt-6-luna",link:"https://platform.openai.com/api-keys",ph:"sk-..."}
+};
 function defaults(){
-  return{ui:"es",players:[{name:"Jugador 1"},{name:"Jugador 2"}],cats:[],format:"open",closest:0.17,timer:0,again:false,sound:true,goal:42,goalCustom:false,bonus:2,apiKey:"",model:"gemini-3.5-flash-lite",per:5,language:"Español",notes:"",saved:[]};
+  return{ui:"es",players:[{name:"Jugador 1"},{name:"Jugador 2"}],cats:[],format:"open",closest:0.17,timer:0,again:false,sound:true,goal:42,goalCustom:false,bonus:2,provider:"gemini",keys:{},models:{},per:5,language:"Español",notes:"",saved:[]};
 }
 let S=defaults();
 S.cats=catsFrom(PRESETS[0].cats,PRESETS[0].level);
@@ -415,7 +434,12 @@ S.cats=catsFrom(PRESETS[0].cats,PRESETS[0].level);
   if(typeof S.sound!=="boolean")S.sound=true;
   S.goal=Math.round(Number(S.goal));if(!(S.goal>=1&&S.goal<=500))S.goal=42;
   if(![0,1,2,3].includes(S.bonus))S.bonus=2;
-  if(S.model==="gemini-2.5-flash")S.model="gemini-3.5-flash-lite";
+  if(!PROV[S.provider])S.provider="gemini";
+  if(!S.keys||typeof S.keys!=="object")S.keys={};
+  if(!S.models||typeof S.models!=="object")S.models={};
+  if(S.apiKey&&!S.keys.gemini)S.keys.gemini=String(S.apiKey);
+  if(S.model&&!S.models.gemini)S.models.gemini=S.model==="gemini-2.5-flash"?"gemini-3.5-flash-lite":String(S.model);
+  delete S.apiKey;delete S.model;
   S.goalCustom=!!S.goalCustom||![10,21,42].includes(S.goal);
 }}
 const defPlayer=n=>(S.ui==="es"?"Jugador ":"Player ")+n;
@@ -526,20 +550,40 @@ const sndLand=slot=>{tone(NOTES[slot],0.7,"sine",0.22);tone(NOTES[slot]*2,0.8,"s
 /* ---------- Claude ---------- */
 let canWrite=true;
 const ready=Promise.resolve();
+const prov=()=>PROV[S.provider]?S.provider:"gemini";
+const curKey=()=>String((S.keys||{})[prov()]||"").trim();
+const curModel=()=>String((S.models||{})[prov()]||"").trim()||PROV[prov()].model;
+const hasKey=()=>!!curKey();
 async function sample(prompt,o){
-  const key=String(S.apiKey||"").trim(),model=String(S.model||"").trim()||"gemini-2.5-flash";
-  const body={contents:[{role:"user",parts:[{text:prompt}]}],generationConfig:{temperature:0.9,maxOutputTokens:16384}};
-  if(/2\.5-flash(?!-lite)/.test(model))body.generationConfig.thinkingConfig={thinkingBudget:0};
+  const p=prov(),key=curKey(),model=curModel();
+  let url,headers={"Content-Type":"application/json"},body,pick;
+  if(p==="claude"){
+    url="https://api.anthropic.com/v1/messages";
+    headers["x-api-key"]=key;headers["anthropic-version"]="2023-06-01";headers["anthropic-dangerous-direct-browser-access"]="true";
+    body={model,max_tokens:16000,stream:true,messages:[{role:"user",content:prompt}]};
+    pick=j=>(j.type==="content_block_delta"&&j.delta&&j.delta.type==="text_delta")?j.delta.text:"";
+  }else if(p==="openai"){
+    url="https://api.openai.com/v1/chat/completions";headers.Authorization="Bearer "+key;
+    body={model,stream:true,max_completion_tokens:16000,messages:[{role:"user",content:prompt}]};
+    pick=j=>(j.choices&&j.choices[0]&&j.choices[0].delta&&j.choices[0].delta.content)||"";
+  }else{
+    url="https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":streamGenerateContent?alt=sse";
+    headers["x-goog-api-key"]=key;
+    body={contents:[{role:"user",parts:[{text:prompt}]}],generationConfig:{temperature:0.9,maxOutputTokens:16384}};
+    if(/2\.5-flash(?!-lite)/.test(model))body.generationConfig.thinkingConfig={thinkingBudget:0};
+    pick=j=>((j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts)||[]).map(x=>x.text||"").join("");
+  }
   let r;
   try{
-    r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":streamGenerateContent?alt=sse",{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":key},body:JSON.stringify(body),signal:o.signal});
+    r=await fetch(url,{method:"POST",headers,body:JSON.stringify(body),signal:o.signal});
   }catch(e){
     if(e&&e.name==="AbortError")throw{code:"cancelled"};
     throw{code:"upstream_error"};
   }
   if(!r.ok){
     let msg="";try{msg=((await r.json()).error||{}).message||""}catch(e){}
-    const c=r.status===429?"rate_limited":(r.status===404?"badmodel":(r.status===401||r.status===403||(r.status===400&&/api key/i.test(msg))?"badkey":"upstream_error"));
+    const credit=p!=="gemini"&&/credit|billing|quota|balance/i.test(msg);
+    const c=(r.status===401||r.status===403||(r.status===400&&/api key/i.test(msg)))?"badkey":(r.status===404?"badmodel":(credit?"nocredit":(r.status===429?"rate_limited":"upstream_error")));
     throw{code:c,message:msg};
   }
   const rd=r.body.getReader(),dec=new TextDecoder();
@@ -552,8 +596,7 @@ async function sample(prompt,o){
       for(const ln of lines){
         if(ln.indexOf("data:")!==0)continue;
         try{
-          const j=JSON.parse(ln.slice(5)),ps=(j.candidates&&j.candidates[0]&&j.candidates[0].content&&j.candidates[0].content.parts)||[];
-          const tx=ps.map(p=>p.text||"").join("");
+          const tx=pick(JSON.parse(ln.slice(5)));
           if(tx)o.onText({delta:tx});
         }catch(e){}
       }
@@ -563,7 +606,6 @@ async function sample(prompt,o){
     throw{code:"upstream_error"};
   }
 }
-const hasKey=()=>!!String(S.apiKey||"").trim();
 
 function closestPerCat(per){const r=S.closest||0;return r>0?Math.max(1,Math.round(per*r/(1-r))):0}
 function buildPrompt(slots,per,m){
@@ -981,9 +1023,10 @@ function renderSetup(){
     '<label class="check"><input id="ag" type="checkbox" data-f="again"'+(S.again?" checked":"")+'><span>'+t("again")+'</span></label>'+
     '<label class="check"><input id="sd" type="checkbox" data-f="sound"'+(S.sound?" checked":"")+'><span>'+t("soundLbl")+'</span></label>'+
   '</section>'+
-  '<section class="sect"><h2>'+t("keyH")+'</h2>'+
-    '<div class="field"><label class="lbl" for="ak">'+t("keyLbl")+'</label><input id="ak" class="inp" type="password" autocomplete="off" spellcheck="false" data-f="apikey" value="'+esc(S.apiKey)+'" placeholder="AIza..."><p class="muted" style="font-size:13px">'+t("keyHelp")+'</p><div><a class="btn sm" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">'+t("keyOpen")+'</a></div></div>'+
-    '<div class="field"><label class="lbl" for="md">'+t("modelLbl")+'</label><input id="md" class="inp" data-f="model" value="'+esc(S.model)+'" maxlength="60" placeholder="gemini-3.5-flash-lite"><p class="muted" style="font-size:13px">'+t("modelHelp")+'</p><div class="row"><button class="btn sm" data-act="findmodels">'+(ui.models==="loading"?t("findingM"):t("findM"))+'</button></div>'+modelList()+'</div></section>'+
+  '<section class="sect"><h2>'+t("aiH")+'</h2>'+
+    '<div class="field"><p class="lbl">'+t("provLbl")+'</p><div class="seg" role="group" aria-label="'+t("provLbl")+'">'+Object.keys(PROV).map(k=>'<button class="segb" aria-pressed="'+(prov()===k)+'" data-act="setprov" data-v="'+k+'">'+esc(PROV[k].name)+'</button>').join("")+'</div><p class="muted" style="font-size:13px">'+t("provHelp",prov())+'</p></div>'+
+    '<div class="field"><label class="lbl" for="ak">'+t("keyLbl2",PROV[prov()].name)+'</label><input id="ak" class="inp" type="password" autocomplete="off" spellcheck="false" data-f="apikey" value="'+esc(curKey())+'" placeholder="'+esc(PROV[prov()].ph)+'"><p class="muted" style="font-size:13px">'+t("keyHelp2",prov())+'</p><div><a class="btn sm" href="'+PROV[prov()].link+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">'+t("keyOpen2")+'</a></div></div>'+
+    '<div class="field"><label class="lbl" for="md">'+t("modelLbl")+'</label><input id="md" class="inp" data-f="model" value="'+esc(curModel())+'" maxlength="60" placeholder="'+esc(PROV[prov()].model)+'"><p class="muted" style="font-size:13px">'+t("modelHelp2",PROV[prov()].model)+'</p><div class="row"><button class="btn sm" data-act="findmodels">'+(ui.models==="loading"?t("findingM"):t("findM"))+'</button></div>'+modelList()+'</div></section>'+
   '<section class="sect"><h2>'+t("langH")+'</h2>'+
     '<div class="field"><p class="lbl">'+t("uiLang")+'</p><div class="seg" role="group" aria-label="'+t("uiLang")+'"><button class="segb" aria-pressed="'+(S.ui==="es")+'" data-act="setui" data-v="es">Español</button><button class="segb" aria-pressed="'+(S.ui==="en")+'" data-act="setui" data-v="en">English</button></div></div>'+
     '<div class="field"><label class="lbl" for="lg">'+t("qLang")+'</label><input id="lg" class="inp" data-f="language" value="'+esc(S.language)+'" maxlength="40" placeholder="Español"></div>'+
@@ -994,16 +1037,25 @@ function modelList(){
   const m=ui.models;
   if(!Array.isArray(m))return m&&m!=="loading"?'<p class="muted" style="font-size:13px">'+esc(m)+'</p>':"";
   if(!m.length)return '<p class="muted" style="font-size:13px">'+t("noModels")+'</p>';
-  return '<p class="muted" style="font-size:13px">'+t("pickM")+'</p><div class="chiprow">'+m.map(x=>'<button class="pchip'+(S.model===x?" used":"")+'" data-act="pickmodel" data-v="'+esc(x)+'">'+esc(x)+'</button>').join("")+'</div>';
+  return '<p class="muted" style="font-size:13px">'+t("pickM")+'</p><div class="chiprow">'+m.map(x=>'<button class="pchip'+(curModel()===x?" used":"")+'" data-act="pickmodel" data-v="'+esc(x)+'">'+esc(x)+'</button>').join("")+'</div>';
 }
 async function findModels(){
   if(!hasKey()){ui.models=t("e_nokey");renderSetup();return}
   ui.models="loading";renderSetup();
+  const p=prov(),key=curKey();
   try{
-    const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200",{headers:{"x-goog-api-key":String(S.apiKey).trim()}});
+    let url,headers;
+    if(p==="claude"){url="https://api.anthropic.com/v1/models?limit=100";headers={"x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"}}
+    else if(p==="openai"){url="https://api.openai.com/v1/models";headers={Authorization:"Bearer "+key}}
+    else{url="https://generativelanguage.googleapis.com/v1beta/models?pageSize=200";headers={"x-goog-api-key":key}}
+    const r=await fetch(url,{headers});
     if(!r.ok){ui.models=errText(r.status===401||r.status===403||r.status===400?"badkey":"upstream_error");renderSetup();return}
     const j=await r.json();
-    ui.models=(j.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes("generateContent")&&/gemini/.test(m.name)&&!/(image|tts|live|embedding|robotics|audio|computer|vision|thinking-exp|learnlm|gemma)/.test(m.name)).map(m=>m.name.replace(/^models\//,"")).sort().reverse();
+    let list;
+    if(p==="claude")list=(j.data||[]).map(m=>m.id).filter(id=>/claude/.test(id));
+    else if(p==="openai")list=(j.data||[]).map(m=>m.id).filter(id=>/^(gpt|o\d)/.test(id)&&!/(audio|realtime|image|tts|transcribe|embedding|moderation|search|instruct|codex|whisper|dall|vision|preview)/.test(id)).sort().reverse();
+    else list=(j.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes("generateContent")&&/gemini/.test(m.name)&&!/(image|tts|live|embedding|robotics|audio|computer|vision|thinking-exp|learnlm|gemma)/.test(m.name)).map(m=>m.name.replace(/^models\//,"")).sort().reverse();
+    ui.models=list;
   }catch(e){ui.models=errText("upstream_error")}
   renderSetup();
 }
@@ -1021,8 +1073,8 @@ function onField(e){
     case "sound":S.sound=el.checked;if(S.sound)audio();break;
     case "goal":{const v=Math.round(+el.value);if(v>=1&&v<=500)S.goal=v;break}
     case "bonus":S.bonus=+el.value;break;
-    case "apikey":S.apiKey=el.value.trim();gen.blocked=false;if(gen.error==="nokey"||gen.error==="badkey")gen.error=null;break;
-    case "model":S.model=el.value.trim();gen.blocked=false;break;
+    case "apikey":S.keys[prov()]=el.value.trim();gen.blocked=false;if(gen.error==="nokey"||gen.error==="badkey")gen.error=null;break;
+    case "model":S.models[prov()]=el.value.trim();gen.blocked=false;break;
     case "language":S.language=el.value;break;
     case "notes":S.notes=el.value;break;
     case "guess":ui.guesses[i]=el.value;return;
@@ -1066,7 +1118,8 @@ const A={
     renderPlay();
   },
   findmodels:()=>findModels(),
-  pickmodel:b=>{S.model=b.dataset.v;gen.blocked=false;if(gen.error==="badmodel")gen.error=null;saveS();renderSetup()},
+  setprov:b=>{S.provider=b.dataset.v;ui.models=null;gen.blocked=false;gen.error=null;saveS();renderSetup()},
+  pickmodel:b=>{S.models[prov()]=b.dataset.v;gen.blocked=false;if(gen.error==="badmodel")gen.error=null;saveS();renderSetup()},
   bonuspick:b=>{if(!ui.bonus)return;ui.bonus.slot=+b.dataset.i;ui.phase="idle";dealBonus()},
   bonusdone:()=>bonusDone(),
   setgoal:b=>{

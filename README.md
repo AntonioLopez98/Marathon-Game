@@ -1,6 +1,6 @@
 # Marathon Game
 
-A customizable trivia board game for the table. Six categories, one random category per turn, and every question card is written on demand by Google's Gemini, so you never run out of fresh cards.
+A customizable trivia board game for the table. Six categories, one random category per turn, and every question card is written on demand by an AI model you choose (Gemini, Claude or ChatGPT), so you never run out of fresh cards.
 
 The whole app is a single file, `index.html`. No build step, no dependencies, no server.
 
@@ -19,15 +19,17 @@ The whole app is a single file, `index.html`. No build step, no dependencies, no
 ## Run it
 
 1. Open `index.html` in a browser, or host it with GitHub Pages.
-2. Create a free API key in [Google AI Studio](https://aistudio.google.com/apikey).
-3. In **Setup**, paste the key under "Gemini connection".
-4. Go back to **Play** and deal a card.
+2. In **Setup**, pick who writes the cards and paste that provider's API key:
+   - **Gemini**: free tier with daily limits. Create a key in [Google AI Studio](https://aistudio.google.com/apikey).
+   - **Claude**: paid API (cents per batch of cards). Create a key in the [Anthropic Console](https://console.anthropic.com/settings/keys). It is separate from a Claude subscription.
+   - **ChatGPT (OpenAI)**: paid API. Create a key on the [OpenAI platform](https://platform.openai.com/api-keys). It is separate from a ChatGPT subscription.
+3. Go back to **Play** and deal a card.
 
-If you get a model error, tap **Find available models** in Setup and pick one from the list. The default is `gemini-3.5-flash-lite`.
+Each provider keeps its own key and model. If you get a model error, tap **Find available models** in Setup and pick one from the list. Defaults: `gemini-3.5-flash-lite`, `claude-sonnet-5-5`, `gpt-6-luna`.
 
 ## Privacy
 
-Your API key and settings are stored only in your browser (`localStorage`). The key is sent only to Google's Gemini API to write cards. Nothing is stored on a server. If you publish this page, each visitor uses their own key.
+Your API key and settings are stored only in your browser (`localStorage`). Each key is sent only to its own provider to write cards. Nothing is stored on a server. If you publish this page, each visitor uses their own key.
 
 ## Limits
 
