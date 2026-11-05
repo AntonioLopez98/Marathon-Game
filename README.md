@@ -16,10 +16,25 @@ The whole app is a single file, `index.html`. No build step, no dependencies, no
 - **Animated trail** at the bottom shows every player climbing from the river valley to a snowy summit flag.
 - Spanish and English interface, light and dark themes, wheel sound effects, and 1 to 6 players.
 
+## Built-in card pack
+
+The game ships with **335 ready-made Spanish cards** (including 24 closest-guess cards), so it works with no API key at all:
+
+| Category | Levels |
+|---|---|
+| Geography | Standard and hard |
+| World History | Standard and hard |
+| Science | Standard and hard |
+| General Culture | Standard |
+| Arts, Sports & Entertainment | Standard |
+| History of Mexico | Standard and hard |
+
+The pack is used while a category keeps its default name and topics, the question language is Spanish, there are no extra notes, and the level is Standard, Hard or Standard & hard. Change any of those (a different category, a country, an Expert level, a note, another language) and the AI writes fresh cards for it instead. Once a category's pack cards run out, the AI takes over too.
+
 ## Run it
 
 1. Open `index.html` in a browser, or host it with GitHub Pages.
-2. In **Setup**, pick who writes the cards and paste that provider's API key:
+2. Optional: to write new cards beyond the pack, go to **Setup** and pick who writes them and paste that provider's API key:
    - **Gemini**: free tier with daily limits. Create a key in [Google AI Studio](https://aistudio.google.com/apikey).
    - **Claude**: paid API (cents per batch of cards). Create a key in the [Anthropic Console](https://console.anthropic.com/settings/keys). It is separate from a Claude subscription.
    - **ChatGPT (OpenAI)**: paid API. Create a key on the [OpenAI platform](https://platform.openai.com/api-keys). It is separate from a ChatGPT subscription.
