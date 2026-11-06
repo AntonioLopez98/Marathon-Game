@@ -366,11 +366,11 @@ const t=(k,...a)=>{const d=T[S.ui]||T.es,v=(k in d)?d[k]:(T2[S.ui]||T2.es)[k];re
 const errText=c=>t("e_"+c)||t("e_upstream_error");
 
 const LEVELS=[
-  {v:"1",n:{es:"Relajado",en:"Casual"},d:{es:"Datos muy conocidos que casi todos aciertan.",en:"Well-known facts most people get right."}},
-  {v:"2",n:{es:"Estándar",en:"Standard"},d:{es:"Cultura general que hace pensar un poco.",en:"General knowledge that makes you think a little."}},
-  {v:"3",n:{es:"Difícil",en:"Hard"},d:{es:"Requiere conocimiento real. Un adulto muy leído acierta la mitad.",en:"Needs real knowledge. A well-read adult gets about half."}},
+  {v:"1",n:{es:"Relajado",en:"Casual"},d:{es:"Datos muy conocidos que casi todos aciertan.",en:"Very well-known facts; about 85% of adults answer correctly."}},
+  {v:"2",n:{es:"Estándar",en:"Standard"},d:{es:"Cultura general que hace pensar un poco.",en:"Solid general knowledge; about 50-60% of adults answer correctly. Not school-level basics."}},
+  {v:"3",n:{es:"Difícil",en:"Hard"},d:{es:"Requiere conocimiento real. Un adulto muy leído acierta la mitad.",en:"Demanding: only about 15-25% of adults answer correctly, and even a well-read person often misses it. Needs specific names, dates, places or mechanisms, never textbook basics."}},
   {v:"5",n:{es:"Estándar y difícil",en:"Standard & hard"},d:{es:"Mezcla de preguntas estándar y difíciles.",en:"A mix of standard and hard questions."}},
-  {v:"4",n:{es:"Experto",en:"Expert"},d:{es:"Datos de especialista y sorprendentes para fans del trivia.",en:"Specialist and surprising facts for dedicated trivia fans."}}
+  {v:"4",n:{es:"Experto",en:"Expert"},d:{es:"Datos de especialista y sorprendentes para fans del trivia.",en:"Very hard: fewer than 5-10% of adults answer correctly; only specialists and veteran trivia champions know it. Obscure, specific details (lesser-known people, exact terms, technical mechanisms, little-known events), never anything taught in school or common in general trivia."}}
 ];
 const lvName=v=>{const l=LEVELS.find(x=>x.v===String(v));return l?l.n[S.ui]:""};
 
@@ -648,6 +648,7 @@ function buildPrompt(slots,per,m){
   "Write "+per+" regular cards (k \"q\")"+(m?" and "+m+" closest-guess cards (k \"n\")":"")+" for each category below, "+(slots.length*(per+m))+" cards in total. Output all the regular cards first, round-robin through the categories ("+order+", then "+order+" again, and so on) so every category gets its first card before any gets its second."+(m?" Then output all the closest-guess cards, also round-robin.":"")+"\n\n"+
   "Categories (number | name | focus | level):\n"+lines+"\n\n"+
   "Rules for all cards:\n"+
+  "- DIFFICULTY IS THE MOST IMPORTANT RULE. Language models usually write questions that are far too easy, so deliberately aim one notch harder than your first instinct. Calibrate by the share of ordinary adults who would answer correctly without options: Casual about 85%, Standard about 55%, Hard about 20%, Expert under 7%. Hard and Expert questions must never be facts taught in primary or secondary school or repeated in popular trivia (examples of what is far too easy for Hard or Expert: how many bones an adult human has, the capital of a large country, the chemical symbol of gold, who painted the Mona Lisa, the planet closest to the Sun). Make them specific instead: a particular person, term, place, mechanism, work or event that only someone who studied or loved the subject would know. Before writing each card, silently ask whether a typical high-school graduate could answer it; if yes for a Hard or Expert card, replace it with a harder one. Do not make a question harder by adding trick wording or by asking for obscure numbers; make it harder by asking about less-known knowledge. Within every category, the Hard and Expert cards must be clearly harder than the Standard ones.\n"+
   "- Write every question, answer and note in "+lang+".\n"+
   "- Use only facts you are sure about. Avoid facts that change over time (current record holders, office holders, populations, rankings, prices). Prefer stable facts.\n"+
   "- Do not give the answer away in the wording of the question. Vary the topics within each category.\n"+
